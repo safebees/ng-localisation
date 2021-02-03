@@ -5,10 +5,7 @@ import {AppComponent} from './app.component';
 import {loadTranslations} from '@angular/localize';
 import {HttpClientModule} from '@angular/common/http';
 import {TranslationInitializerService} from './common/translation-initializer.service';
-
-loadTranslations({
-  HelloWorld: 'Hallo Wältli!!'
-});
+import {TRANSLATION_FILES, TRANSLATION_TOKEN} from './common/translation-token';
 
 @NgModule({
   declarations: [
@@ -19,8 +16,10 @@ loadTranslations({
     BrowserModule
   ],
   providers: [
-
     {
+      provide: TRANSLATION_TOKEN,
+      useValue: TRANSLATION_FILES
+    }, {
       provide: APP_INITIALIZER,
       useFactory: (configService: TranslationInitializerService) =>
         () => configService.loadTranslations(),
